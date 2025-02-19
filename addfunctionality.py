@@ -1,6 +1,11 @@
 def add_numbers(numbers):
     if not numbers:
         return 0
+        end = numbers.find('\n')
+        # removing delimiters
+        delimiter = numbers[2:end]
+        numbers = numbers[end + 1:]
+        numbers = numbers.replace(delimiter, ',')
         numbers = numbers.replace('\n', ',')
         nums = [int(n) for n in numbers.split(',')]
     return sum(nums)
@@ -11,6 +16,8 @@ def test_add():
     assert add("1") == 1
     assert add("1,5") == 6
     assert add("1\n2,3") == 6
-    print("Handled new line logic here")
+    assert add("//;\n1;2") == 3
+    assert add("//|\n1|2|3") == 6
+    print("Handled delimiter logic here")
 
 test_add()
